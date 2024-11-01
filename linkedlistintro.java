@@ -27,7 +27,7 @@ class linkedlist{
           System.out.print(temp.value+"->");
           temp = temp.next;
       }
-      System.out.print("END");
+      System.out.print("END\n");
     }
     
     //insert in the end 
@@ -89,6 +89,77 @@ class linkedlist{
         temp.next=null;
         size--;
      }
+     //delete in the middle
+     
+     public void delete(int index){
+        if(index == 0){
+            deleteFirst();return ;
+        }
+        if(index ==size-1){
+          deleteEnd();return;
+        }
+        Node prev = get(index-1);
+        prev.next = prev.next.next;
+        size--;
+     }
+     
+     //getting element 
+     public Node get(int index){
+        Node node = head;
+        for(int i=0;i<index;i++){
+          node = node.next;
+        }
+        return node;
+     }
+     //finding element
+     public int find(int val){
+        Node temp = head;
+        while(temp!=null){
+            if(temp.value==val){
+                System.out.println("VALUE FOUND:"+temp.value);
+                return 0;
+            }
+            else{
+                temp = temp.next;
+            }
+        }
+        return 0;
+     }
+     
+     //reverse print
+     public void revprint(){
+        Stack<Integer> st = new Stack<>();
+        Node temp = head;
+        while(temp!=null){
+          int a = temp.value;
+          st.push(a);
+          temp = temp.next;
+        }
+        System.out.println("REVERSE PRINT:");
+        for(int i=st.size()-1 ;i>=0;i--){
+          int b = st.pop();
+          System.out.print(b+" ");
+        }
+     }
+     
+     //circular linked list
+     public void cll(){
+      Node temp = head;
+      while(temp.next!=null){
+        temp = temp.next;
+      }
+      tail = temp;
+      tail.next = head;
+     }
+     public void displaycll(){
+        Node temp = head;
+        System.out.println("CIRCULAR LINKED LIST:");
+        while(temp.next!=head){
+            int a = temp.value;
+            System.out.print(a+" ");
+            temp = temp.next;
+        }
+     }
      
     private class Node{
       private int value;
@@ -116,6 +187,11 @@ class linkedlistintro{
         ll.insert(46,0);
         ll.deleteFirst();
         ll.deleteEnd();
+        ll.delete(2);
+        ll.find(25);
         ll.display();
+        ll.revprint();
+        ll.cll();
+        ll.displaycll();
     }
 }
